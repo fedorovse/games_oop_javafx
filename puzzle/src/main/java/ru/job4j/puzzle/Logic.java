@@ -68,9 +68,51 @@ public class Logic {
         return rst;
     }
 
+    /**
+     * Method monoHorizontal - проверяет заполнена ли данная строка полностью 1
+     * @param board int[][] - входной массив
+     * @param row int - индекс строки в массиве, которую проверяем
+     * @return boolean - true если строка заполнена 1, false - если нет
+     */
+    public boolean monoHorizontal(int[][] board, int row) {
+        boolean result = true;
+        for (int index = 0; index < board.length; index++) {
+            if (board[row][index] != 1) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Method monoVertical - проверяет заполнен ли данный столбец полностью 1
+     * @param board int[][] - входной массив
+     * @param column int - индекс столба в массиве, которую проверяем
+     * @return boolean - true если столбец заполнен 1, false - если нет
+     */
+    public boolean monoVertical(int[][] board, int column) {
+        boolean result = true;
+        for (int index = 0; index < board.length; index++) {
+            if (board[index][column] != 1) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
+
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
+        for (int index = 0; index < table.length; index++) {
+            if (monoHorizontal(table, index) || monoVertical(table, index)) {
+                result = true;
+                break;
+            }
+        }
+
         return result;
     }
 
