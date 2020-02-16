@@ -22,26 +22,31 @@ public class BishopBlack implements Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) {
-        throw new IllegalStateException(
-                String.format("Could not way by diagonal from %s to %s", source, dest)
-        );
-//        if (!isDiagonal(source, dest)) {
-//            throw new IllegalStateException(
-//                    String.format("Could not way by diagonal from %s to %s", source, dest)
-//            );
-//        }
-//        int size = ...;
-//        Cell[] steps = new Cell[size];
-//        int deltaX = ...;
-//        int deltaY = ...;
-//        for (int index = 0; index < size; index++) {
-//            steps[index] = ...
-//        }
-//        return steps;
+        if (!isDiagonal(source, dest)) {
+            Cell[] steps = new Cell[0];
+            return steps;
+        }
+        int size = Math.abs(source.x - dest.x);
+        Cell[] steps = new Cell[size];
+        int deltaX = -1;
+        int deltaY = -1;
+        if (source.x < dest.x) {
+            deltaX = 1;
+        }
+        if (source.y < dest.y) {
+            deltaY = 1;
+        }
+        for (int index = 0; index < size; index++) {
+            steps[index] = Cell.findBy(source.x + deltaX * (index + 1), source.y + deltaY * (index + 1));
+        }
+        return steps;
     }
 
     public boolean isDiagonal(Cell source, Cell dest) {
         //TODO check diagonal
+        if (Math.abs(source.x - dest.x) == Math.abs(source.y - dest.y)) {
+            return true;
+        }
         return false;
     }
 
