@@ -31,6 +31,7 @@ public class Logic {
                 for (Cell step: steps) {
                     if (this.findBy(step) != -1) {
                         countFigures++;
+                        break;
                     }
                 }
                 if (countFigures == 0) {
